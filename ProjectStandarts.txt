@@ -1,0 +1,34 @@
+- Loggin standarts (Controllerni xar bir methodini console.log qilyapmiz)
+- Naming standarts:
+    Function, method, variables => CAMEL (goHome)
+    class => Pascal                      (MemberService)
+    folder,file => Kebab
+    css = Snake                          (button_style)
+
+- Error handling     
+
+
+/* Request:
+    Traditional Api
+    Rest Api
+    GraphQl Api
+    
+*/
+/* Frontend Development:
+Traditional FD => SSR => EJS
+Modern FD      => SPA => REACT
+
+*/
+
+/* Cookies:
+    request join
+    self destroy
+
+*/
+
+/* Validation:
+    Frontend Validation
+    Pipe Validation
+    Backend Validation
+    Database Validation
+*/
