@@ -3,7 +3,11 @@ import Errors, { HttpCode, Message } from "../libs/Errors";
 import { T } from "../libs/types/common";
 import ProductService from "../models/Product.service";
 import { AdminRequest, ExstendedRequest } from "../libs/types/member";
-import { ProductInput, ProductInquiry, ProductUpdateInput } from "../libs/types/product";
+import {
+	ProductInput,
+	ProductInquiry,
+	ProductUpdateInput,
+} from "../libs/types/product";
 import { ProductCollection } from "../libs/enums/product.enum";
 
 const productService = new ProductService();
@@ -86,6 +90,7 @@ productController.createNewProduct = async (
 		res.send(
 			`<script> alert ("Sucessful creation"); window.location.replace("/admin/product/all") </script>`
 		);
+		console.log("data:", data);
 	} catch (err) {
 		console.log("Error createNewProduct:", err);
 		const message =
@@ -96,13 +101,16 @@ productController.createNewProduct = async (
 	}
 };
 
-productController.updateChosenProduct = async (req: ExstendedRequest, res: Response) => {
+productController.updateChosenProduct = async (
+	req: ExstendedRequest,
+	res: Response
+) => {
 	try {
 		console.log("updateChosenProduct");
 		const id = req.params.id;
 		const input: ProductUpdateInput = req.body;
 		input.productImages = req.files?.map((ele) => {
-			return ele.path; 
+			return ele.path;
 		});
 
 		const result = await productService.updateChosenProduct(id, input);

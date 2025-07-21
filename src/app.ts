@@ -7,6 +7,8 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import { MORGAN_FORMAT } from "./libs/config";
 import { T } from "./libs/types/common";
+import { Server as SocketIOServer } from "socket.io";
+import http, { createServer } from "http";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
@@ -53,4 +55,23 @@ app.set("view engine", "ejs"); // BSSR
 app.use("/admin", routerAdmin); //SSR
 app.use("/", router); // SPA: REACT
 
-export default app; //modeule.export = app;
+const server = http.createServer(app);
+const io = new SocketIOServer(server, {
+	cors: {
+		origin: true,
+		credentials: true,
+	},
+});
+
+let summaryClient = 0;
+io.on("connection", (socket) => {
+	summaryClient++;
+	console.log(`Connetion &  total[${summaryClient}]`);
+
+	socket.on("disconnect", () => {
+		summaryClient--;
+		console.log(`Disconnection &  total[${summaryClient}]`);
+	});
+});
+
+export default server; //modeule.export = app;
