@@ -26,7 +26,6 @@ class ProductService {
 
 	/* SPA */
 	public async getProducts(inquiry: ProductInquiry): Promise<Product[]> {
-		console.log("inquiry:", inquiry);
 		const match: T = { productStatus: ProductStatus.PROCESS };
 
 		if (inquiry.productCollection)
@@ -57,7 +56,7 @@ class ProductService {
 			.exec();
 
 		if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-		console.log("result", result);
+
 		return result;
 	}
 
@@ -81,7 +80,6 @@ class ProductService {
 			};
 			const existView = await this.viewService.checkViewExistence(input);
 
-			console.log("exist:", !!existView);
 			if (!existView) {
 				// Insert View
 				console.log("PLANNING TO INSERT NEW VIEW");
@@ -131,7 +129,6 @@ class ProductService {
 			.exec();
 		if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.UPDATE_FAILED);
 
-		console.log("result", result);
 		return result;
 	}
 }
