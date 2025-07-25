@@ -14,9 +14,5 @@ module.exports = {
 			instances: 1,
 			exec_mode: "cluster",
 		},
-		{
-			name: "worker",
-			script: "worker.js",
-		},
 	],
 };
